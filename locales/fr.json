@@ -1,0 +1,91 @@
+{
+  "api": {
+    "twitter": {
+      "error": { "profile": "erreur en francais" }
+    }
+  },
+  "posts": {
+    "create": {
+      "stepone": {
+        "title": "Veuillez sélectionner le compte pour cette publication",
+        "button": "Suivant"
+      },
+      "steptwo": {
+        "empty": "Un post Twitter doit avoir un body et/ou une/des image(s)"
+      },
+      "stepthree": {
+        "title": "Veuillez sélectionner la date de publication",
+        "button": "Créer"
+      }
+    }
+  },
+  "calendar": {
+    "posts": {
+      "publication": {
+        "posted": "Votre post a été publié le dayName day monthName, à time",
+        "programmed": "Votre post est programmé pour être publié le dayName day monthName, à time",
+        "failed": "La publication de votre post a échoué à être publié le dayName day monthName, à time"
+      }
+    },
+    "month": {
+      "01": "Janvier",
+      "02": "Février",
+      "03": "Mars",
+      "04": "Avril",
+      "05": "Mai",
+      "06": "Juin",
+      "07": "Juillet",
+      "08": "Août",
+      "09": "Septembre",
+      "10": "Octobre",
+      "11": "Novembre",
+      "12": "Décembre"
+    },
+    "title": {
+      "lun": "Lundi",
+      "mar": "Mardi",
+      "mer": "Mercredi",
+      "jeu": "Jeudi",
+      "ven": "Vendredi",
+      "sam": "Samedi",
+      "dim": "Dimanche"
+    }
+  },
+  "social_accounts": {
+    "status": {
+      "is_expired": "Expiré",
+      "is_actif": "Actif",
+      "expire_soon": "Expire bientôt"
+    },
+    "filter": {
+      "type": "Type de compte",
+      "status": "Statut du compte"
+    },
+    "empty": "Aucun réseaux sociaux",
+    "isVerified": {
+      "true": "Vérifié",
+      "false": "Non vérifié"
+    },
+    "delete": {
+      "been_deleted": "Votre réseau social à bien été supprimé",
+      "error": "Une erreur est survenue lors de la supprésion de ce réseau social. Veuillez réessayer.",
+      "title": "Voulez vous supprimer ce réseau social ?",
+      "button": "Supprimer le compte"
+    },
+    "link": {
+      "button": "Aller voir le compte"
+    },
+    "renew": {
+      "button": "Re-synchroniser le compte"
+    },
+    "column": {
+      "type": "Type de compte",
+      "username": "Nom du compte",
+      "status": "Statut",
+      "isVerified": "Statut de vérification",
+      "actions": "Actions",
+      "email": "Email",
+      "expireAt": "Expire le"
+    }
+  }
+}
