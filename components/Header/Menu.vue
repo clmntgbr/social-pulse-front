@@ -9,6 +9,10 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Facebook, Linkedin, Twitter } from "lucide-vue-next";
+import { SocialAccountsAction } from "~/composables/api/social_accounts/actions";
+import { getFacebookLoginUrl } from "~/composables/api/social_accounts/getFacebookLoginUrl";
+import { getlinkedinLoginUrl } from "~/composables/api/social_accounts/getLinkedinLoginUrl";
+import { getTwitterLoginUrl } from "~/composables/api/social_accounts/getTwitterLoginUrl";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -47,6 +51,27 @@ const components: { title: string; href: string; description: string }[] = [
       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
   },
 ];
+
+async function handleGetFacebookLoginUrl() {
+  const loginUrl = await getFacebookLoginUrl();
+  if (loginUrl.value.type === SocialAccountsAction.GET_LOGIN_URL_SUCCESS) {
+    navigateTo(loginUrl.value.payload.value, { external: true });
+  }
+}
+
+async function handleGetLinkedinLoginUrl() {
+  const loginUrl = await getlinkedinLoginUrl();
+  if (loginUrl.value.type === SocialAccountsAction.GET_LOGIN_URL_SUCCESS) {
+    navigateTo(loginUrl.value.payload.value, { external: true });
+  }
+}
+
+async function handleGetTwitterLoginUrl() {
+  const loginUrl = await getTwitterLoginUrl();
+  if (loginUrl.value.type === SocialAccountsAction.GET_LOGIN_URL_SUCCESS) {
+    navigateTo(loginUrl.value.payload.value, { external: true });
+  }
+}
 </script>
 
 <template>
@@ -59,6 +84,7 @@ const components: { title: string; href: string; description: string }[] = [
             <li class="col-span-1">
               <NavigationMenuLink as-child>
                 <a
+                  @click="handleGetFacebookLoginUrl"
                   class="flex h-full w-full select-none flex-col justify-center items-center rounded-xl facebookButton"
                 >
                   <Facebook
@@ -73,6 +99,7 @@ const components: { title: string; href: string; description: string }[] = [
             <li class="col-span-1">
               <NavigationMenuLink as-child>
                 <a
+                  @click="handleGetTwitterLoginUrl"
                   class="flex h-full w-full select-none flex-col justify-center items-center rounded-xl twitterButton"
                 >
                   <Twitter
@@ -87,6 +114,7 @@ const components: { title: string; href: string; description: string }[] = [
             <li class="col-span-2">
               <NavigationMenuLink as-child>
                 <a
+                  @click="handleGetLinkedinLoginUrl"
                   class="flex h-full w-full select-none flex-col justify-center items-center rounded-xl linkedinButton"
                 >
                   <Linkedin

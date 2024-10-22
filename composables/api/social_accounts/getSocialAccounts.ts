@@ -2,40 +2,50 @@ import { HTTP_STATUS } from "~/enums/HTTP_STATUS";
 import SocialPulseClient from "../client/SocialPulseClient";
 import { SocialAccountsAction } from "./actions";
 import type { SocialAccountsType } from "./types";
+import { SocialAccountsUseState } from "../client/UseState";
+import { HttpNotFoundError } from "../HttpErrors";
 
-export async function getSocialAccounts(): Promise<void> {
+export async function getSocialAccounts(): Promise<
+  Ref<SocialAccountsType, SocialAccountsType>
+> {
+  const state = useState<SocialAccountsType>(
+    SocialAccountsUseState.GET_SOCIAL_ACCOUNTS
+  );
   try {
     const client = new SocialPulseClient();
     const response = await client.getSocialAccounts();
 
     if (response === null) {
-      useState<SocialAccountsType>("GetSocialAccounts", () => ({
+      state.value = {
         type: SocialAccountsAction.GET_SOCIAL_ACCOUNTS_HTTP_INTERNAL_ERROR,
         payload: new HttpNotFoundError("Get Social Accounts Internal Error"),
-      }));
-      return;
+      };
+      return state;
     }
 
     switch (response.status) {
       case HTTP_STATUS.OK:
-        useState<SocialAccountsType>("GetSocialAccounts", () => ({
+        state.value = {
           type: SocialAccountsAction.GET_SOCIAL_ACCOUNTS_SUCCESS,
           payload: response.data,
-        }));
-        break;
+        };
+        return state;
 
       case HTTP_STATUS.NOT_FOUND:
-        useState<SocialAccountsType>("GetSocialAccounts", () => ({
+        state.value = {
           type: SocialAccountsAction.GET_SOCIAL_ACCOUNTS_NOT_FOUND,
           payload: new HttpNotFoundError("Get Social Accounts not found"),
-        }));
-        break;
+        };
+        return state;
 
       default:
-        useState<SocialAccountsType>("GetSocialAccounts", () => ({
+        state.value = {
           type: SocialAccountsAction.GET_SOCIAL_ACCOUNTS_HTTP_INTERNAL_ERROR,
           payload: new HttpNotFoundError("Get Social Accounts Internal Error"),
-        }));
+        };
+        return state;
     }
-  } catch (error) {}
+  } catch (error) {
+    return state;
+  }
 }

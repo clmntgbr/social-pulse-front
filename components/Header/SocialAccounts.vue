@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { SocialAccountsAction } from "~/composables/social_accounts/actions";
-import { getSocialAccounts } from "~/composables/social_accounts/getSocialAccounts";
-import type { SocialAccountsType } from "~/composables/social_accounts/types";
+import { SocialAccountsUseState } from "~/composables/api/client/UseState";
+import { SocialAccountsAction } from "~/composables/api/social_accounts/actions";
+import { getSocialAccounts } from "~/composables/api/social_accounts/getSocialAccounts";
+import type { SocialAccountsType } from "~/composables/api/social_accounts/types";
 
-const socialAccounts = useState<SocialAccountsType>("GetSocialAccounts");
+const socialAccounts = useState<SocialAccountsType>(
+  SocialAccountsUseState.GET_SOCIAL_ACCOUNTS
+);
 await getSocialAccounts();
 </script>
 <template>

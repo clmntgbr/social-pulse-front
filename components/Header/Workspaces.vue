@@ -1,26 +1,35 @@
 <script lang="ts" setup>
 import { cn } from "@/lib/utils";
-import { WorkspacesAction } from "~/composables/workspaces/actions";
-import { getWorkspace } from "~/composables/workspaces/getWorkspace";
-import { getWorkspaces } from "~/composables/workspaces/getWorkspaces";
-import type { WorkspacesType } from "~/composables/workspaces/types";
+import { WorkspacesUseState } from "~/composables/api/client/UseState";
+import { getSocialAccounts } from "~/composables/api/social_accounts/getSocialAccounts";
+import { getUser } from "~/composables/api/users/getUser";
+import { postUserWorkspaceActive } from "~/composables/api/users/getWorkspace";
+import { WorkspacesAction } from "~/composables/api/workspaces/actions";
+import { getWorkspace } from "~/composables/api/workspaces/getWorkspace";
+import { getWorkspaces } from "~/composables/api/workspaces/getWorkspaces";
+import type { WorkspacesType } from "~/composables/api/workspaces/types";
 
-const workspaces = useState<WorkspacesType>("GetWorkspaces");
-const workspace = useState<WorkspacesType>("GetWorkspace");
+const workspaces = useState<WorkspacesType>(WorkspacesUseState.GET_WORKSPACES);
+const workspace = useState<WorkspacesType>(WorkspacesUseState.GET_WORKSPACE);
 
 await getWorkspaces();
 await getWorkspace();
 
-const selectedWorkspaceUuid = useState<string | null>("Workspace", () => null);
+const selectedWorkspaceUuid = useState<string | null>(
+  "selectedWorkspaceUuid",
+  () => null
+);
 
 watch(
   () => selectedWorkspaceUuid.value,
   async (workspaceUuid) => {
     if (workspaceUuid) {
-      refreshNuxtData("GetSocialAccounts");
+      await postUserWorkspaceActive(workspaceUuid);
+      getSocialAccounts();
+      getUser();
+      getWorkspace();
     }
-  },
-  { immediate: true }
+  }
 );
 
 watch(
