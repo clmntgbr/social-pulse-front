@@ -17,4 +17,5 @@ export enum UsersUseState {
 
 export enum PostsUseState {
   GET_POSTS = "GET_POSTS",
+  GET_POST = "GET_POST",
 }

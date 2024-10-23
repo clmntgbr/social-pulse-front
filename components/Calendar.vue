@@ -8,6 +8,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import FullCalendar from "@fullcalendar/vue3";
 import { PostsUseState } from "~/composables/api/client/UseState";
 import { PostsAction } from "~/composables/api/posts/actions";
+import { getPost } from "~/composables/api/posts/getPost";
 import { getPosts } from "~/composables/api/posts/getPosts.js";
 import type { PostsType } from "~/composables/api/posts/types";
 import { getScrollTime, updateEvents } from "~/composables/calendar/calendar";
@@ -26,7 +27,10 @@ const title = ref<string>("");
 const intervalId: { value: ReturnType<typeof setInterval> | null } = {
   value: null,
 };
-
+const isOpenPostSlideover = useState<boolean>(
+  "isOpenPostSlideover",
+  () => false
+);
 const posts = useState<PostsType>(PostsUseState.GET_POSTS);
 await getPosts();
 
@@ -76,7 +80,10 @@ const calendarOptions = <CalendarOptions>{
   eventDidMount: function (info) {
     // console.log("eventDidMount");
   },
-  eventClick: async function (info) {},
+  eventClick: async function (info) {
+    isOpenPostSlideover.value = true;
+    await getPost(info.event._def.extendedProps.groupdUuid);
+  },
   navLinkDayClick: function (date, jsEvent) {
     const calendar = calendarRef.value?.getApi();
     calendar?.changeView("dayGridDay", date);
@@ -210,6 +217,8 @@ nuxtApp.hook("app:mounted", () => {
 </script>
 
 <template>
+  <CalendarButtonCreatePost />
+  <CalendarSlideoverPost />
   <div class="h-screen" style="height: calc(100vh - 4rem)">
     <div class="flex flex-col h-full">
       <div class="flex justify-between items-center p-3">

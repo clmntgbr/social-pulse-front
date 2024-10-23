@@ -18,4 +18,5 @@ export enum USERS {
 
 export enum POSTS {
   GET_POSTS = "/posts",
+  GET_POST = "/posts/%s",
 }

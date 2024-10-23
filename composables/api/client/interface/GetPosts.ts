@@ -1,30 +1,12 @@
-interface SocialAccount {
-  "@id": string;
-  "@type": "SocialAccount";
-  socialAccountId: string;
-  isVerified: boolean;
-  username: string;
-  name: string;
-  avatarUrl: string;
-  socialAccountTypeAvatarUrl: string;
-  socialAccountType: string;
-  email: string;
-  givenName: string | null;
-  familyName: string | null;
-  uuid: string;
-}
-
-export interface Post {
-  "@id": string;
-  "@type": "Post";
+interface Post {
+  postId: string | null;
   groupUuid: string;
   groupType: string;
-  header: string;
+  header: string | null;
   body: string | null;
   pictures: string[];
   status: string;
-  postAt: string;
-  socialAccount: SocialAccount;
+  postAt: string | null;
   uuid: string;
 }
 

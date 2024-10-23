@@ -1,6 +1,7 @@
 // composables/socialAccountsClient.ts
 import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 import type { GetLoginUrl } from "./interface/GetLoginUrl";
+import type { GetPost } from "./interface/GetPost";
 import type { GetPosts } from "./interface/GetPosts";
 import type { GetSocialAccounts } from "./interface/GetSocialAccounts";
 import type { GetUser } from "./interface/GetUser";
@@ -61,6 +62,14 @@ export default class SocialPulseClient {
   public async getPosts(): Promise<AxiosResponse<GetPosts> | null> {
     try {
       return await this.httpClient.get(POSTS.GET_POSTS);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  public async getPost(uuid: string): Promise<AxiosResponse<GetPost> | null> {
+    try {
+      return await this.httpClient.get(POSTS.GET_POST.replace("%s", uuid));
     } catch (e) {
       return null;
     }

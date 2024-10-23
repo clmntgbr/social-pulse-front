@@ -1,3 +1,4 @@
+import type { GetPost } from "../client/interface/GetPost";
 import type { GetPosts } from "../client/interface/GetPosts";
 import type { HttpNotFoundError } from "../HttpErrors";
 import type { PostsAction } from "./actions";
@@ -22,7 +23,32 @@ export type GetPostsErrorAction = {
   payload: HttpNotFoundError;
 };
 
+export type GetPostSuccessAction = {
+  type: PostsAction.GET_POST_SUCCESS;
+  payload: GetPost;
+};
+
+export type GetPostNotFoundAction = {
+  type: PostsAction.GET_POST_NOT_FOUND;
+  payload: HttpNotFoundError;
+};
+
+export type GetPostInternalErrorAction = {
+  type: PostsAction.GET_POST_HTTP_INTERNAL_ERROR;
+  payload: HttpNotFoundError;
+};
+
+export type GetPostErrorAction = {
+  type: PostsAction.GET_POST_ERROR;
+  payload: HttpNotFoundError;
+};
+
 export type PostsType =
   | GetPostsSuccessAction
   | GetPostsNotFoundAction
-  | GetPostsInternalErrorAction;
+  | GetPostsInternalErrorAction
+  | GetPostsErrorAction
+  | GetPostSuccessAction
+  | GetPostNotFoundAction
+  | GetPostInternalErrorAction
+  | GetPostErrorAction;

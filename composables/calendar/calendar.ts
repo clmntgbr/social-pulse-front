@@ -1,7 +1,8 @@
 import { Locales } from "~/enums/LOCALES";
 import { POSTS_STATUS } from "~/enums/POSTS_STATUS";
 import { type Event } from "~/types/calendar";
-import type { GetPosts, Post } from "../api/client/interface/GetPosts";
+import type { Post } from "../api/client/interface/GetPost";
+import type { GetPosts } from "../api/client/interface/GetPosts";
 
 function getOrdinal(day: number): string {
   if (day > 3 && day < 21) return "th";
@@ -19,14 +20,14 @@ function getOrdinal(day: number): string {
 
 export function updateEvents(events: globalThis.Ref<Event[]>, posts: GetPosts) {
   events.value =
-    posts?.member.map((post: Post): Event => {
+    posts?.member.map((post): Event => {
       return {
-        title: "post.header",
+        title: post.header,
         overlap: false,
-        color: getEventColor(post),
+        color: getEventColor(post as Post),
         extendedProps: { groupdUuid: post.groupUuid },
-        start: post.postAt,
-        end: post.postAt,
+        start: post.postAt?.toString() || "",
+        end: post.postAt?.toString() || "",
       };
     }) || [];
 }
