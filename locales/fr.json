@@ -6,6 +6,8 @@
   },
   "posts": {
     "create": {
+      "success": "Votre publication a été programmée avec succès.",
+      "error": "Une erreur est survenue lors de la programmation de votre publication. Veuillez réessayer.",
       "stepone": {
         "title": "Veuillez sélectionner le compte pour cette publication",
         "button": "Suivant"
@@ -15,7 +17,8 @@
       },
       "stepthree": {
         "title": "Veuillez sélectionner la date de publication",
-        "button": "Créer"
+        "button": "Créer",
+        "header": "Titre de la publication"
       }
     }
   },

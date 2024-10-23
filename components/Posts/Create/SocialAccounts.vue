@@ -105,7 +105,7 @@ const submit = () => {
       :disabled="!selectedCreationPostSocialAccount"
       :label="t('posts.create.stepone.button')"
       trailing
-      class="w-full justify-end"
+      class="w-full justify-center"
       :onClick="submit"
     />
   </div>

@@ -6,6 +6,7 @@ import type {
 import { PostsUseState } from "~/composables/api/client/UseState";
 import { PostsAction } from "~/composables/api/posts/actions";
 import type { PostsType } from "~/composables/api/posts/types";
+import { SOCIAL_ACCOUNTS_TYPE } from "~/enums/SOCIAL_ACCOUNTS_TYPE";
 
 const isOpenPostSlideover = useState<boolean>(
   "isOpenPostSlideover",
@@ -82,7 +83,43 @@ watch(
           :key="masterPost?.uuid"
           :post="masterPost"
         />
-        {{ masterPost?.header }}
+        <PostsFacebook
+          v-if="
+            selectedSocialAccount?.socialAccountType ===
+            SOCIAL_ACCOUNTS_TYPE.FACEBOOK
+          "
+          :key="masterPost?.uuid"
+          :socialAccount="selectedSocialAccount"
+          :post="masterPost"
+        />
+        <PostsTwitter
+          v-if="
+            selectedSocialAccount?.socialAccountType ===
+            SOCIAL_ACCOUNTS_TYPE.TWITTER
+          "
+          :key="masterPost?.uuid"
+          :socialAccount="selectedSocialAccount"
+          :post="masterPost"
+        />
+        <PostsTwitterThread
+          v-for="item in threadsPost"
+          v-if="
+            selectedSocialAccount?.socialAccountType ===
+            SOCIAL_ACCOUNTS_TYPE.TWITTER
+          "
+          :key="item?.uuid"
+          :socialAccount="selectedSocialAccount"
+          :post="item"
+        />
+        <PostsLinkedin
+          v-if="
+            selectedSocialAccount?.socialAccountType ===
+            SOCIAL_ACCOUNTS_TYPE.LINKEDIN
+          "
+          :key="masterPost?.uuid"
+          :socialAccount="selectedSocialAccount"
+          :post="masterPost"
+        />
       </div>
     </UCard>
   </USlideover>

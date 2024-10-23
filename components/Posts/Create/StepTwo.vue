@@ -9,6 +9,15 @@ const selectedCreationPostSocialAccount = useState<SocialAccount | undefined>(
 if (!selectedCreationPostSocialAccount.value) {
   navigateTo("/posts/create?step=one");
 }
+
+watch(
+  () => selectedCreationPostSocialAccount.value,
+  (newValue) => {
+    if (newValue === undefined) {
+      navigateTo("/posts/create?step=one");
+    }
+  }
+);
 </script>
 
 <template>

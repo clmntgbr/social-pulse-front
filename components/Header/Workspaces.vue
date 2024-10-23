@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { cn } from "@/lib/utils";
+import type { SocialAccount } from "~/composables/api/client/interface/GetPost";
 import { WorkspacesUseState } from "~/composables/api/client/UseState";
+import { getPosts } from "~/composables/api/posts/getPosts";
 import { getSocialAccounts } from "~/composables/api/social_accounts/getSocialAccounts";
 import { getUser } from "~/composables/api/users/getUser";
 import { postUserWorkspaceActive } from "~/composables/api/users/getWorkspace";
@@ -28,6 +30,12 @@ watch(
       getSocialAccounts();
       getUser();
       getWorkspace();
+      getPosts();
+
+      const selectedCreationPostSocialAccount = useState<
+        SocialAccount | undefined
+      >("SelectedCreationPostSocialAccount", () => undefined);
+      selectedCreationPostSocialAccount.value = undefined;
     }
   }
 );

@@ -43,6 +43,26 @@ export type GetPostErrorAction = {
   payload: HttpNotFoundError;
 };
 
+export type CreatePostsSuccessAction = {
+  type: PostsAction.CREATE_POSTS_SUCCESS;
+  payload: GetPost;
+};
+
+export type CreatePostsNotFoundAction = {
+  type: PostsAction.CREATE_POSTS_NOT_FOUND;
+  payload: HttpNotFoundError;
+};
+
+export type CreatePostsInternalErrorAction = {
+  type: PostsAction.CREATE_POSTS_HTTP_INTERNAL_ERROR;
+  payload: HttpNotFoundError;
+};
+
+export type CreatePostsErrorAction = {
+  type: PostsAction.CREATE_POSTS_ERROR;
+  payload: HttpNotFoundError;
+};
+
 export type PostsType =
   | GetPostsSuccessAction
   | GetPostsNotFoundAction
@@ -51,4 +71,8 @@ export type PostsType =
   | GetPostSuccessAction
   | GetPostNotFoundAction
   | GetPostInternalErrorAction
-  | GetPostErrorAction;
+  | GetPostErrorAction
+  | CreatePostsSuccessAction
+  | CreatePostsNotFoundAction
+  | CreatePostsInternalErrorAction
+  | CreatePostsErrorAction;

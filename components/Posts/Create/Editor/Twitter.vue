@@ -196,7 +196,7 @@ const submit = async () => {
       color="primary"
       :label="t('posts.create.stepone.button')"
       trailing
-      class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full justify-end"
+      class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full justify-center"
       @click="submit"
     />
   </div>

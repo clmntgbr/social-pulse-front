@@ -1,4 +1,4 @@
-export interface CreatePost {
+interface Post {
   id: number;
   groupType: string;
   header: string | null;
@@ -7,3 +7,5 @@ export interface CreatePost {
   postAt: string | null;
   socialAccountUuid: string;
 }
+
+export type CreatePosts = Post[];
